@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+
+
+.containerZ {
+    padding: 20px 150px;
+}
+
+body {
+    padding-top: 30px;
+    font-family: Lato !important;
+    font-weight: 300;
+}
+
+.navbar {
+    margin-bottom: 0;
+    background-color: #fbfbfb;
+    z-index: 9999;
+    border: 0;
+    font-size: 1em !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 1px;
+    border-radius: 0;
+    font-family: Lato, sans-serif;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color: white !important;
+    background-color: #FF5733 !important;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+}
+
+.navbar-custom a {
+    color: black !important;
+}
+
+#about h1 {
+    background-color: #FF5733;
+    color: white;
+    padding: 10px 0px;
+    border-radius: 10px;
+    font-weight: 300;
+    font-size: 2.2em;
+    max-width: 350px;
+}
+
+.form-control {
+    font-size:1em;
+}
+
+/* overriding bootstrap */
+
+.btn-primary, .btn-primary:visited {
+    background-color:  #a3a3a3  !important;
+    color: white;
+    border: none !important;
+    font-weight: 400 !important;
+    font-size: 1.3em !important;
+}
+
+.btn-primary:hover {
+    background-color:  #FF5733  !important;
+    color: white;
+}
+
+.btn-primary:active {
+    background-color:  #FF3300   !important;
+}
+
+.btn-basic  {
+    background-color:  #a3a3a3  !important;
+    color: white;
+    border: none !important;
+    font-weight: 400 !important;
+    font-size: 1.3em !important;
+    width:100px;
+}
+
+.btn-basic:hover {
+    background-color:  #a3a3a3  !important;
+    color: white;
+}
+
+.btn-default {
+    background-color:  #FF5733   !important;
+    color: white;
+    border: none !important;
+    font-weight: 400 !important;
+    font-size: 1.3em !important;
+    width:100px;
+}
+
+.btn-default:hover {
+    background-color:  #FF5733   !important;
+    color: white;
+}
