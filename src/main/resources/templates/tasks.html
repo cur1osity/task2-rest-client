@@ -6,8 +6,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/main.css}"
           href="../../css/main.css"/>
-    <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css" />-->
-    <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />-->
     <title>Tasks application</title>
 </head>
 <body>
@@ -37,14 +35,14 @@
     <form method="post" th:action="@{/}" th:object="${newTask}">
 
         <label for="title">Title</label>
-        <input type="text" placeholder="Add task title" class="form-control"
+        <input type="text" placeholder="Please enter task title" class="form-control"
                th:field="*{title}" id="title"/>
         <!--<span th:if="${error != null}" th:text="${error}"></span>-->
 
         <br>
 
         <label for="description">Description</label>
-        <input type="text" placeholder="Add task description" class="form-control"
+        <input type="text" placeholder="Please enter task description" class="form-control"
                th:field="*{description}" id="description"/>
         <!--<span th:if="${error != null}" th:text="${error}"></span>-->
         <br>
@@ -56,36 +54,52 @@
 </div>
 
 
-<div class="container">
-    <div class="row" th:each="task : ${tasks}">
-        <div class="nine columns">
-            <form th:method="put" th:action="@{/}">
-                <input type="hidden" name="id" th:value="${task.id}"/>
-                <input type="hidden" name="description" th:value="${task.description}"/>
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>Completed?</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.title}"></td>
+            <td th:text="${task.description}"></td>
+            <td th:text="${task.startDate}"></td>
+            <td th:text="${task.endDate}"></td>
+            <td>
+                <form th:method="put" th:action="@{/}">
+                    <input type="hidden" name="id" th:value="${task.id}"/>
+                    <input type="hidden" name="title" th:value="${task.title}"/>
+                    <input type="hidden" name="description" th:value="${task.description}"/>
                 <input type="checkbox" name="completed" th:checked="${task.completed}" onchange="form.submit()"/>
-                <span th:text="${task.description}"></span>
-            </form>
-        </div>
-        <div class="three columns">
-            <form th:method="delete" th:action="@{/}">
-                <input type="hidden" name="id" th:value="${task.id}"/>
-                <button class="button u-full-width" type="submit">Delete</button>
-            </form>
-        </div>
-    </div>
-    <hr/>
-    <!--<form method="post" th:action="@{/}" th:object="${newTask}">-->
-    <!--<div class="row">-->
-    <!--<div class="nine columns">-->
-    <!--<input type="text" placeholder="Description of the task" class="u-full-width"-->
-    <!--th:field="*{description}"/>-->
-    <!--&lt;!&ndash;<span th:if="${error != null}" th:text="${error}"></span>&ndash;&gt;-->
-    <!--</div>-->
-    <!--<div class="three columns">-->
-    <!--<button type="submit" class="button-primary u-full-width">Add</button>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</form>-->
+                </form>
+            </td>
+            <td>
+                <form th:method="put" th:action="@{/}">
+                    <input type="hidden" name="id" th:value="${task.id}"/>
+                    <input type="hidden" name="title" th:value="${task.title}"/>
+                    <input type="hidden" name="description" th:value="${task.description}"/>
+                    <button class="btn btn-primary" type="submit">Update</button>
+                </form>
+            </td>
+            <td>
+                <form th:method="delete" th:action="@{/}">
+                    <input type="hidden" name="id" th:value="${task.id}"/>
+                    <button class="btn btn-primary" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
 </div>
+<hr/>
 </body>
 </html>
