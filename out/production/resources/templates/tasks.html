@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Marcin Gajc">
+    <meta name="description" content="SPRING REST API">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -22,15 +25,14 @@
         </div>
     </div>
 </nav>
-<br>
 
-<div id="about" class="container">
-    <h1 class="col-md-6 col-md-offset-3">Welcome to the Tasks app</h1>
+<br>
+<div id = "about" class="container">
+    <h1 class ="col-md-8 col-md-offset-4">Welcome to the Task app</h1>
 </div>
-
 <br>
 
-<div class="containerZ col-md-6 col-md-offset-3">
+<div class="col-md-6 col-md-offset-3 containerZ">
 
     <form method="post" th:action="@{/}" th:object="${newTask}">
 
@@ -42,8 +44,7 @@
         <br>
 
         <label for="description">Description</label>
-        <input type="text" placeholder="Please enter task description" class="form-control"
-               th:field="*{description}" id="description"/>
+        <textarea th:field="*{description}" class="form-control" rows="5" id="description" placeholder="Please enter task description"></textarea>
         <!--<span th:if="${error != null}" th:text="${error}"></span>-->
         <br>
 
@@ -52,6 +53,9 @@
     </form>
 
 </div>
+
+<br>
+<br>
 
 
 <div class="container-fluid">
