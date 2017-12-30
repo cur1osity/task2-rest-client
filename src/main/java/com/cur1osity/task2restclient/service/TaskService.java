@@ -33,6 +33,10 @@ public class TaskService {
         return restTemplate.exchange(idResource, HttpMethod.PUT, new HttpEntity<>(task), TaskDto.class, id).getBody();
     }
 
+    public TaskDto update2(Long id, TaskDto task) {
+        return restTemplate.exchange(idResource, HttpMethod.PATCH, new HttpEntity<>(task), TaskDto.class, id).getBody();
+    }
+
     public void delete(Long id) {
         restTemplate.delete(idResource, id);
     }

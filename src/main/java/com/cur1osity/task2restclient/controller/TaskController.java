@@ -34,6 +34,13 @@ public class TaskController {
         return "redirect:/";
     }
 
+
+    @RequestMapping(method = RequestMethod.PATCH)
+    public String update2(@RequestParam Long id, TaskDto task) {
+        service.update2(id, task);
+        return "redirect:/";
+    }
+
     @RequestMapping(method = RequestMethod.DELETE)
     public String delete(@RequestParam Long id) {
         service.delete(id);

@@ -7,23 +7,19 @@ public class TaskDto {
     private Long id;
     private String title;
     private String description;
-    private LocalDateTime startDate;
+    private String startDate;
     private boolean completed;
-    private LocalDateTime endDate;
+    private String endDate;
 
 
     public TaskDto() {
     }
 
-    public TaskDto(Long id, String title, String description, LocalDateTime startDate, boolean completed, LocalDateTime endDate) {
+    public TaskDto(Long id, String title, String description, boolean completed) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.startDate = startDate.now();
         this.completed = completed;
-        if (completed) {
-            this.endDate = endDate.now();
-        }
     }
 
     public Long getId() {
@@ -38,7 +34,7 @@ public class TaskDto {
         return description;
     }
 
-    public LocalDateTime getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
@@ -46,7 +42,7 @@ public class TaskDto {
         return completed;
     }
 
-    public LocalDateTime getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
@@ -58,7 +54,7 @@ public class TaskDto {
         this.description = description;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
@@ -66,7 +62,7 @@ public class TaskDto {
         this.completed = completed;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 }
