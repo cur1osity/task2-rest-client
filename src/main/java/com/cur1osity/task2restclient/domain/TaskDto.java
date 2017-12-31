@@ -1,6 +1,5 @@
 package com.cur1osity.task2restclient.domain;
 
-import java.time.LocalDateTime;
 
 public class TaskDto {
 
@@ -8,6 +7,7 @@ public class TaskDto {
     private String title;
     private String description;
     private String startDate;
+    private String updatedDate;
     private boolean completed;
     private String endDate;
 
@@ -64,5 +64,13 @@ public class TaskDto {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
     }
 }

@@ -4,12 +4,10 @@ import com.cur1osity.task2restclient.domain.TaskDto;
 import com.cur1osity.task2restclient.service.TaskService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -23,10 +21,21 @@ public class TaskController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String findAll(Model model) {
-        model.addAttribute("tasks", service.findAll());
+        model.addAttribute("tasksX", service.findAll());
         model.addAttribute("newTask", new TaskDto());
         return "tasks";
     }
+
+    @GetMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.OK)
+    public String findOne(@PathVariable Long id, Model model)  {
+        model.addAttribute("tasksX", service.findAll());
+        model.addAttribute("newTask", new TaskDto());
+        model.addAttribute("tasks", service.findTask(id));
+        model.addAttribute("newTask", new TaskDto());
+        return "tasks";
+    }
+
 
     @RequestMapping(method = RequestMethod.PUT)
     public String update(@RequestParam Long id, TaskDto task) {

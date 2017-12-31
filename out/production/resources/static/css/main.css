@@ -2,13 +2,13 @@
 
 
 .containerZ {
-    padding: 0px 50px 50px 50px;
+    padding: 0px 50px 20px 50px;
 }
 
 .container {
     margin: auto;
     margin-top: 10px;
-    padding: 10px 120px;
+    padding:0px 180px 10px 180px;
 }
 
 body {
@@ -16,6 +16,7 @@ body {
     font-family: Lato !important;
     font-weight: 300;
 }
+
 
 .navbar {
     margin-bottom: 0;
@@ -43,7 +44,7 @@ body {
     color: black !important;
 }
 
-#about h1 {
+.caption h1 {
     background-color: #FF5733;
     color: white;
     padding: 10px 10px;
@@ -51,7 +52,9 @@ body {
     font-weight: 300;
     font-size: 1.5em;
     max-width: 245px;
+    text-align: center;
 }
+
 
 .form-control {
     font-size:1em;
@@ -103,3 +106,44 @@ body {
     background-color:  #FF5733   !important;
     color: white;
 }
+
+.updateForm-invisible {
+    display: none;
+}
+
+.updateForm-visible {
+    display: inline;
+    background-color: #fcfcfc;
+    border-style: solid;
+    border-color: #cacaca;
+    border-width: thin;
+
+}
+
+.cancel_button {
+    margin-left:500px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.table_text {
+    color: white;
+    font-size:1em;
+    font-weight: bold;
+    background-color: #ff5733;
+}
+
+.table_text2 {
+    font-weight:normal;
+}
+
+.table_text_completed {
+    color:grey;
+    font-weight: lighter;
+    font-style: italic;
+}
+
+
+
+
+
