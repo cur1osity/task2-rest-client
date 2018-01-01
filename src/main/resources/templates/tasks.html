@@ -21,6 +21,14 @@
         <div class="collapse navbar-collapse" id="myNavbar2">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a th:href="@{/}">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle black_link" data-toggle="dropdown">
+                        Settings <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <form th:method="delete" th:action="@{/}"><input type="submit" value="       Delete all tasks"
+                                                                         class="linkButton"/></form>
+                    </ul>
             </ul>
         </div>
     </div>
@@ -28,8 +36,8 @@
 <br>
 
 <div
-     th:classappend="${('/'== #httpServletRequest.requestURI) ? 'postForm-visible' : 'postForm-invisible'}"
-     class="col-md-6 col-md-offset-3 containerZ postForm-visible">
+        th:classappend="${('/'== #httpServletRequest.requestURI) ? 'postForm-visible' : 'postForm-invisible'}"
+        class="col-md-6 col-md-offset-3 containerZ postForm-visible">
     <div class="caption container">
         <h1>Create task</h1>
     </div>
@@ -41,14 +49,15 @@
         <br>
         <label for="descriptionX">Description</label>
         <input type="text" th:field="*{description}" class="form-control" id="descriptionX"
-                  placeholder="Please enter task description"/>
+               placeholder="Please enter task description"/>
         <!--<span th:if="${error != null}" th:text="${error}"></span>-->
         <br>
         <button type="submit" class="btn btn-primary">Add task</button>
     </form>
 </div>
 <br>
-<div th:each="task : ${tasksX}" th:classappend="${('/' + task.id != #httpServletRequest.requestURI) ? 'updateForm-invisible' : 'updateForm-visible'}"
+<div th:each="task : ${tasksX}"
+     th:classappend="${('/' + task.id != #httpServletRequest.requestURI) ? 'updateForm-invisible' : 'updateForm-visible'}"
      class="col-md-6 col-md-offset-3 containerZ updateForm-invisible">
     <div class="caption container">
         <h1>Update task</h1>
@@ -67,9 +76,6 @@
         <br>
         <button type="submit" class="btn btn-primary">Update task</button>
     </form>
-    <!--<a class="cancel_button" th:href="@{'/'}">-->
-        <!--<button class="btn btn-primary">Cancel update</button>-->
-    <!--</a>-->
 </div>
 <div class="container-fluid">
     <table class="table table-striped">
@@ -106,15 +112,17 @@
                 </form>
             </td>
             <td>
-                <a th:classappend= "${('/' + task.id != #httpServletRequest.requestURI) ? 'edit_button_visible' : 'edit_button_invisible'}" class="edit_button_visible" th:href="@{'/' + ${task.id}}">
+                <a th:classappend="${('/' + task.id != #httpServletRequest.requestURI) ? 'edit_button_visible' : 'edit_button_invisible'}"
+                   class="edit_button_visible" th:href="@{'/' + ${task.id}}">
                     <button class="btn btn-primary" th:disabled="${task.isCompleted()} ? true : false">Edit</button>
                 </a>
-                <a th:classappend= "${('/' + task.id == #httpServletRequest.requestURI) ? 'cancel_button_visible' : 'cancel_button_invisible'}" class="cancel_button_visible" th:href="@{'/'}">
+                <a th:classappend="${('/' + task.id == #httpServletRequest.requestURI) ? 'cancel_button_visible' : 'cancel_button_invisible'}"
+                   class="cancel_button_visible" th:href="@{'/'}">
                     <button class="btn btn-primary">Cancel</button>
                 </a>
             </td>
             <td>
-                <form th:method="delete" th:action="@{/}">
+                <form th:method="delete" th:action="@{/task.id}">
                     <input type="hidden" name="id" th:value="${task.id}"/>
                     <button class="btn btn-primary" type="submit">Delete</button>
                 </form>

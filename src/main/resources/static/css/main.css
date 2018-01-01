@@ -162,5 +162,25 @@ body {
     display: none;
 }
 
+.black_link {
+    color: black !important;
+}
+
+.other_links {
+    font-weight: 300 !important;
+}
+
+.linkButton {
+    background: none;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.dropdown-menu:hover {
+    background-color: #ff5733 !important;
+    color:white !important;
+}
 
 

@@ -49,4 +49,8 @@ public class TaskService {
     public TaskDto create(TaskDto task) {
         return restTemplate.postForObject(resource, task, TaskDto.class);
     }
+
+    public void deleteAllTask(){
+        restTemplate.delete(resource);
+    }
 }

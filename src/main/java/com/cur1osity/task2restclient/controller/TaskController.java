@@ -50,9 +50,15 @@ public class TaskController {
         return "redirect:/";
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
+    @DeleteMapping({"/{id}"})
     public String delete(@RequestParam Long id) {
         service.delete(id);
+        return "redirect:/";
+    }
+
+    @DeleteMapping
+    public String deleteAll() {
+        service.deleteAllTask();
         return "redirect:/";
     }
 
