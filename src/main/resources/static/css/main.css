@@ -113,11 +113,14 @@ body {
 
 .updateForm-visible {
     display: inline;
-    background-color: #fcfcfc;
-    border-style: solid;
-    border-color: #cacaca;
-    border-width: thin;
+}
 
+.postForm-visible {
+    display: inline;
+}
+
+.postForm-invisible {
+    display: none;
 }
 
 .cancel_button {
@@ -143,7 +146,21 @@ body {
     font-style: italic;
 }
 
+.cancel_button_visible {
+    display: inline;
+}
 
+.cancel_button_invisible {
+    display: none;
+}
+
+.edit_button_visible {
+    display: inline;
+}
+
+.edit_button_invisible {
+    display: none;
+}
 
 
 

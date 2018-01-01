@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta name="author" content="Marcin Gajc">
     <meta name="description" content="SPRING REST API">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('[id="buttonX"]').ready(function () {
-                $(".updateForm-invisible").toggleClass("updateForm-visible");
-            });
-        });
-    </script>
-
     <link rel="stylesheet" th:href="@{/css/main.css}"
           href="../../css/main.css"/>
     <title>Tasks application</title>
@@ -34,11 +26,13 @@
     </div>
 </nav>
 <br>
-<div class="caption container">
-    <h1 class="col-md-8 col-md-offset-4">Create task</h1>
-</div>
-<div class="col-md-6 col-md-offset-3 containerZ postForm-visible">
 
+<div
+     th:classappend="${('/'== #httpServletRequest.requestURI) ? 'postForm-visible' : 'postForm-invisible'}"
+     class="col-md-6 col-md-offset-3 containerZ postForm-visible">
+    <div class="caption container">
+        <h1>Create task</h1>
+    </div>
     <form method="post" th:action="@{/}" th:object="${newTask}">
         <label for="titleX">Title</label>
         <input type="text" placeholder="Please enter task title" class="form-control"
@@ -46,15 +40,16 @@
         <!--<span th:if="${error != null}" th:text="${error}"></span>-->
         <br>
         <label for="descriptionX">Description</label>
-        <textarea th:field="*{description}" class="form-control" rows="4" id="descriptionX"
-                  placeholder="Please enter task description"></textarea>
+        <input type="text" th:field="*{description}" class="form-control" id="descriptionX"
+                  placeholder="Please enter task description"/>
         <!--<span th:if="${error != null}" th:text="${error}"></span>-->
         <br>
         <button type="submit" class="btn btn-primary">Add task</button>
     </form>
 </div>
 <br>
-<div class="col-md-6 col-md-offset-3 containerZ updateForm-invisible" th:each="task : ${tasks}">
+<div th:each="task : ${tasksX}" th:classappend="${('/' + task.id != #httpServletRequest.requestURI) ? 'updateForm-invisible' : 'updateForm-visible'}"
+     class="col-md-6 col-md-offset-3 containerZ updateForm-invisible">
     <div class="caption container">
         <h1>Update task</h1>
     </div>
@@ -72,9 +67,9 @@
         <br>
         <button type="submit" class="btn btn-primary">Update task</button>
     </form>
-    <a class="cancel_button" th:href="@{'/'}">
-        <button class="btn btn-primary">Cancel update</button>
-    </a>
+    <!--<a class="cancel_button" th:href="@{'/'}">-->
+        <!--<button class="btn btn-primary">Cancel update</button>-->
+    <!--</a>-->
 </div>
 <div class="container-fluid">
     <table class="table table-striped">
@@ -111,10 +106,12 @@
                 </form>
             </td>
             <td>
-                <a th:href="@{'/' + ${task.id}}">
-                    <button class="btn btn-primary" th:disabled="${task.isCompleted()} ? true : false" >Edit</button>
+                <a th:classappend= "${('/' + task.id != #httpServletRequest.requestURI) ? 'edit_button_visible' : 'edit_button_invisible'}" class="edit_button_visible" th:href="@{'/' + ${task.id}}">
+                    <button class="btn btn-primary" th:disabled="${task.isCompleted()} ? true : false">Edit</button>
                 </a>
-
+                <a th:classappend= "${('/' + task.id == #httpServletRequest.requestURI) ? 'cancel_button_visible' : 'cancel_button_invisible'}" class="cancel_button_visible" th:href="@{'/'}">
+                    <button class="btn btn-primary">Cancel</button>
+                </a>
             </td>
             <td>
                 <form th:method="delete" th:action="@{/}">
