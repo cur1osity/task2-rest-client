@@ -6,6 +6,8 @@ body {
     font-weight: 300;
 }
 
+/* overriding bootstrap */
+
 .navbar {
     margin-bottom: 0;
     background-color: #fbfbfb;
@@ -32,25 +34,10 @@ body {
     color: black !important;
 }
 
-.caption h1 {
-    font-family: Lato;
-    background-color: #FF5733;
-    color: white;
-    padding: 10px 10px;
-    border-radius: 10px;
-    font-weight: 300;
-    font-size: 1.5em;
-    text-align: center;
-    width: 150px;
-    margin:auto;
-    margin-top:40px;
+.dropdown-menu:hover {
+    background-color: #ff5733 !important;
+    color:white !important;
 }
-
-.formX {
-    margin-bottom: 60px;
-}
-
-/* overriding bootstrap */
 
 .btn-primary, .btn-primary:visited {
     background-color:  #a3a3a3  !important;
@@ -70,34 +57,105 @@ body {
     background-color:  #FF3300   !important;
 }
 
+.btn-default, .btn-default:visited {
+    background-color:  #a3a3a3  !important;
+    color: white;
+    border: none !important;
+    font-weight: 400 !important;
+    font-size: 1.3em !important;
+}
 
-.updateForm-invisible {
+.btn-default:hover {
+    background-color:  #FF5733  !important;
+    color: white;
+}
+
+.btn-default:active {
+    background-color:  #FF3300   !important;
+}
+
+.btn-info, .btn-info:visited {
+    background-color:  #a3a3a3  !important;
+    color: white;
+    border: none !important;
+    font-weight: 400 !important;
+    font-size: 1.3em !important;
+    width: 100%;
+}
+
+.btn-info:hover {
+    background-color: darkblue  !important;
+    color: white;
+}
+
+.btn-info:active {
+    background-color: darkblue   !important;
+}
+
+.btn-basic, .btn-basic:visited {
+    background-color:  #a3a3a3  !important;
+    color: white;
+    border: none !important;
+    font-weight: 400 !important;
+    font-size: 1.3em !important;
+}
+
+.btn-basic:hover {
+    background-color: darkblue  !important;
+    color: white;
+}
+
+.btn-basic:active {
+    background-color: darkblue   !important;
+}
+
+/*layout*/
+
+.caption1 h1 {
+    font-family: Lato;
+    background-color: #FF5733;
+    color: white;
+    padding: 10px 10px;
+    border-radius: 10px;
+    font-weight: 300;
+    font-size: 1.5em;
+    text-align: center;
+    width: 150px;
+    margin:auto;
+    margin-top:40px;
+}
+
+.caption2 h1 {
+    font-family: Lato;
+    background-color: darkblue;
+    color: white;
+    padding: 10px 10px;
+    border-radius: 10px;
+    font-weight: 300;
+    font-size: 1.5em;
+    text-align: center;
+    width: 150px;
+    margin:auto;
+    margin-top:40px;
+}
+
+.formX {
+    margin-bottom: 60px;
+}
+
+.hidden {
     display: none;
 }
 
-.updateForm-visible {
+.show {
     display: inline;
-}
-
-.postForm-visible {
-    display: inline;
-}
-
-.postForm-invisible {
-    display: none;
-}
-
-.cancel_button {
-    margin-left:500px;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
 }
 
 .table_text {
     color: white;
     font-size:1em;
     font-weight: bold;
-    background-color: #ff5733;
+    background-color: darkblue;
 }
 
 .table_text2 {
@@ -110,28 +168,8 @@ body {
     font-style: italic;
 }
 
-.cancel_button_visible {
-    display: inline;
-}
-
-.cancel_button_invisible {
-    display: none;
-}
-
-.edit_button_visible {
-    display: inline;
-}
-
-.edit_button_invisible {
-    display: none;
-}
-
 .black_link {
     color: black !important;
-}
-
-.other_links {
-    font-weight: 300 !important;
 }
 
 .linkButton {
@@ -141,9 +179,6 @@ body {
     cursor: pointer;
 }
 
-.dropdown-menu:hover {
-    background-color: #ff5733 !important;
-    color:white !important;
-}
+
 
 
