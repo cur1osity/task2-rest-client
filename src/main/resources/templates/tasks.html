@@ -16,17 +16,17 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" th:href="@{/}">Tasks App</a>
+            <a class="navbar-brand" th:href="@{/tasks}">Tasks App</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a th:href="@{/}">Home</a></li>
+                <li class="active"><a th:href="@{/tasks}">Home</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle black_link" data-toggle="dropdown">
                         Settings <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <form th:method="delete" th:action="@{/}"><input type="submit"
+                        <form th:method="delete" th:action="@{/tasks}"><input type="submit"
                                                                          value="           Delete all tasks           "
                                                                          class="linkButton"/></form>
                     </ul>
@@ -35,12 +35,12 @@
     </div>
 </nav>
 <br>
-    <div th:class="${('/'== #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
+    <div th:class="${('/tasks'== #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
          class="container col-md-12 show">
     <div class="caption1">
         <h1>Create task</h1>
     </div>
-    <form class="formX col-md-6 col-md-offset-3" method="post" th:action="@{/}" th:object="${newTask}">
+    <form class="formX col-md-6 col-md-offset-3" method="post" th:action="@{/tasks}" th:object="${newTask}">
         <label for="titleX">Title</label>
         <input type="text" placeholder="Please enter task title" class="form-control"
                th:field="*{title}" id="titleX"/>
@@ -54,12 +54,12 @@
         <button type="submit" class="btn btn-primary">Add task</button>
     </form>
 </div>
-<div th:each="task : ${tasksX}" th:class="${('/' + task.id != #httpServletRequest.requestURI) ? 'hidden' : 'show'}"
+<div th:each="task : ${tasksX}" th:class="${('/tasks/' + task.id != #httpServletRequest.requestURI) ? 'hidden' : 'show'}"
      class="container col-md-12 hidden">
     <div class="caption2">
         <h1>Update task</h1>
     </div>
-    <form class="formX col-md-6 col-md-offset-3" th:method="patch" th:action="@{/}">
+    <form class="formX col-md-6 col-md-offset-3" th:method="patch" th:action="@{/tasks}">
         <label for="title">Title</label>
         <input type="text" class="form-control" th:value="${task.title}"
                id="title" name="title"/>
@@ -90,18 +90,18 @@
         </thead>
         <tbody>
         <tr th:each="task : ${tasksX}">
-            <td th:classappend="|${('/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
+            <td th:classappend="|${('/tasks/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
                 th:text="${task.title}"></td>
-            <td th:classappend="|${('/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
+            <td th:classappend="|${('/tasks/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
                 th:text="${task.description}"></td>
-            <td th:classappend="|${('/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
+            <td th:classappend="|${('/tasks/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
                 th:text="${task.startDate}"></td>
-            <td th:classappend="|${('/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
+            <td th:classappend="|${('/tasks/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
                 th:text="${task.updatedDate}"></td>
-            <td th:classappend="|${('/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
+            <td th:classappend="|${('/tasks/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
                 th:text="${task.endDate}"></td>
             <td>
-                <form th:method="patch" th:action="@{/}">
+                <form th:method="patch" th:action="@{/tasks}">
                     <input type="hidden" name="id" th:value="${task.id}"/>
                     <input type="hidden" name="title" th:value="${task.title}"/>
                     <input type="hidden" name="description" th:value="${task.description}"/>
@@ -109,19 +109,19 @@
                 </form>
             </td>
             <td>
-                <a th:class="${('/' + task.id != #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
-                   class="show" th:href="@{'/' + ${task.id}}">
+                <a th:class="${('/tasks/' + task.id != #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
+                   class="show" th:href="@{'/tasks/' + ${task.id}}">
                     <button class="btn btn-default" th:disabled="${task.isCompleted()} ? true : false">Edit</button>
                 </a>
-                <a th:class="${('/' + task.id == #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
-                   class="show" th:href="@{'/'}">
+                <a th:class="${('/tasks/' + task.id == #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
+                   class="show" th:href="@{'/tasks'}">
                     <button class="btn btn-basic">Cancel</button>
                 </a>
             </td>
             <td>
-                <form th:method="delete" th:action="@{/task.id}">
+                <form th:method="delete" th:action="@{/tasks}">
                     <input type="hidden" name="id" th:value="${task.id}"/>
-                    <button class="btn btn-default" type="submit" th:disabled="${'/' != #httpServletRequest.requestURI} ? true : false">Delete</button>
+                    <button class="btn btn-default" type="submit" th:disabled="${'/tasks' != #httpServletRequest.requestURI} ? true : false">Delete</button>
                 </form>
             </td>
         </tr>

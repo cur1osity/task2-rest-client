@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/tasks")
 public class TaskController {
     @Autowired
     private TaskService service;
@@ -40,32 +40,32 @@ public class TaskController {
     @RequestMapping(method = RequestMethod.PUT)
     public String update(@RequestParam Long id, TaskDto task) {
         service.update(id, task);
-        return "redirect:/";
+        return "redirect:/tasks";
     }
 
 
     @RequestMapping(method = RequestMethod.PATCH)
     public String update2(@RequestParam Long id, TaskDto task) {
         service.update2(id, task);
-        return "redirect:/";
+        return "redirect:/tasks";
     }
 
     @DeleteMapping({"/{id}"})
     public String delete(@RequestParam Long id) {
         service.delete(id);
-        return "redirect:/";
+        return "redirect:/tasks";
     }
 
     @DeleteMapping
     public String deleteAll() {
         service.deleteAllTask();
-        return "redirect:/";
+        return "redirect:/tasks";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("newTask") TaskDto task) {
         service.create(task);
-        return "redirect:/";
+        return "redirect:/tasks";
     }
 
 //    @ExceptionHandler(HttpClientErrorException.class)
