@@ -43,11 +43,11 @@ body {
     text-align: center;
     width: 150px;
     margin:auto;
-    margin-top:20px;
+    margin-top:40px;
 }
 
 .formX {
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 /* overriding bootstrap */
@@ -58,6 +58,7 @@ body {
     border: none !important;
     font-weight: 400 !important;
     font-size: 1.3em !important;
+    width: 100%;
 }
 
 .btn-primary:hover {
@@ -69,33 +70,6 @@ body {
     background-color:  #FF3300   !important;
 }
 
-.btn-basic  {
-    background-color:  #a3a3a3  !important;
-    color: white;
-    border: none !important;
-    font-weight: 400 !important;
-    font-size: 1.3em !important;
-    width:100px;
-}
-
-.btn-basic:hover {
-    background-color:  #a3a3a3  !important;
-    color: white;
-}
-
-.btn-default {
-    background-color:  #FF5733   !important;
-    color: white;
-    border: none !important;
-    font-weight: 400 !important;
-    font-size: 1.3em !important;
-    width:100px;
-}
-
-.btn-default:hover {
-    background-color:  #FF5733   !important;
-    color: white;
-}
 
 .updateForm-invisible {
     display: none;
