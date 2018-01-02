@@ -1,29 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
 
-
-.containerZ {
-    padding: 0px 50px 20px 50px;
-}
-
-.container {
-    margin: auto;
-    margin-top: 10px;
-    padding:0px 180px 10px 180px;
-}
-
 body {
     padding-top: 30px;
     font-family: Lato !important;
     font-weight: 300;
 }
 
-
 .navbar {
     margin-bottom: 0;
     background-color: #fbfbfb;
     z-index: 9999;
     border: 0;
-    font-size: 1em !important;
+    font-size: 1.2em !important;
     line-height: 1.42857143 !important;
     letter-spacing: 1px;
     border-radius: 0;
@@ -45,19 +33,21 @@ body {
 }
 
 .caption h1 {
+    font-family: Lato;
     background-color: #FF5733;
     color: white;
     padding: 10px 10px;
     border-radius: 10px;
     font-weight: 300;
     font-size: 1.5em;
-    max-width: 245px;
     text-align: center;
+    width: 150px;
+    margin:auto;
+    margin-top:20px;
 }
 
-
-.form-control {
-    font-size:1em;
+.formX {
+    margin-bottom: 20px;
 }
 
 /* overriding bootstrap */
@@ -176,7 +166,6 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
-
 
 .dropdown-menu:hover {
     background-color: #ff5733 !important;

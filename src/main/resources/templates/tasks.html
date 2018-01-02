@@ -26,7 +26,7 @@
                         Settings <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <form th:method="delete" th:action="@{/}"><input type="submit" value="       Delete all tasks"
+                        <form th:method="delete" th:action="@{/}"><input type="submit" value="           Delete all tasks           "
                                                                          class="linkButton"/></form>
                     </ul>
             </ul>
@@ -34,14 +34,12 @@
     </div>
 </nav>
 <br>
-
-<div
-        th:classappend="${('/'== #httpServletRequest.requestURI) ? 'postForm-visible' : 'postForm-invisible'}"
-        class="col-md-6 col-md-offset-3 containerZ postForm-visible">
-    <div class="caption container">
+<div th:classappend="${('/'== #httpServletRequest.requestURI) ? 'postForm-visible' : 'postForm-invisible'}"
+     class="container col-md-12 postForm-visible">
+    <div class="caption">
         <h1>Create task</h1>
     </div>
-    <form method="post" th:action="@{/}" th:object="${newTask}">
+    <form class = "formX col-md-6 col-md-offset-3" method="post" th:action="@{/}" th:object="${newTask}">
         <label for="titleX">Title</label>
         <input type="text" placeholder="Please enter task title" class="form-control"
                th:field="*{title}" id="titleX"/>
@@ -55,14 +53,13 @@
         <button type="submit" class="btn btn-primary">Add task</button>
     </form>
 </div>
-<br>
 <div th:each="task : ${tasksX}"
      th:classappend="${('/' + task.id != #httpServletRequest.requestURI) ? 'updateForm-invisible' : 'updateForm-visible'}"
-     class="col-md-6 col-md-offset-3 containerZ updateForm-invisible">
-    <div class="caption container">
+     class="container col-md-12 updateForm-invisible">
+    <div class="caption">
         <h1>Update task</h1>
     </div>
-    <form th:method="patch" th:action="@{/}">
+    <form class ="formX col-md-6 col-md-offset-3" th:method="patch" th:action="@{/}">
         <label for="title">Title</label>
         <input type="text" class="form-control" th:value="${task.title}"
                id="title" name="title"/>
