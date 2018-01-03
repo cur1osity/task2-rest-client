@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -39,25 +40,29 @@ public class TaskController {
     }
 
     @PatchMapping({"/{id}"})
-    public String update(@PathVariable Long id, TaskDto task) {
+    public String update(@Valid @PathVariable Long id, TaskDto task, RedirectAttributes model) {
+        model.addFlashAttribute("message_update", "success");
         service.update(id, task);
         return "redirect:/tasks";
     }
 
     @DeleteMapping({"/{id}"})
-    public String delete(@PathVariable Long id) {
+    public String delete(@PathVariable Long id, RedirectAttributes model) {
+        model.addFlashAttribute("message_delete", "success");
         service.delete(id);
         return "redirect:/tasks";
     }
 
     @DeleteMapping
-    public String deleteAll() {
+    public String deleteAll(RedirectAttributes model) {
+        model.addFlashAttribute("message_deleteAll", "success");
         service.deleteAllTask();
         return "redirect:/tasks";
     }
 
     @PostMapping
-    public String create(@Valid @ModelAttribute("newTask") TaskDto task) {
+    public String create(@Valid @ModelAttribute("newTask") TaskDto task, RedirectAttributes model) {
+        model.addFlashAttribute("message_post","success");
         service.create(task);
         return "redirect:/tasks";
     }

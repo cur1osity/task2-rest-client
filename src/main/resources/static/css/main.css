@@ -109,6 +109,11 @@ body {
     background-color: darkblue   !important;
 }
 
+.alert-success {
+    text-align: center !important;
+    font-size: 1.5em;
+}
+
 /*layout*/
 
 .caption1 h1 {
@@ -178,6 +183,7 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
 
 
 
