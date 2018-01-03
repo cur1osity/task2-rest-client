@@ -19,7 +19,7 @@ public class TaskController {
     @Autowired
     private ObjectMapper mapper;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String findAll(Model model) {
         model.addAttribute("tasksX", service.findAll());
         model.addAttribute("newTask", new TaskDto());
@@ -36,7 +36,7 @@ public class TaskController {
         return "tasks";
     }
 
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.PATCH)
+    @PatchMapping({"/{id}"})
     public String update(@PathVariable Long id, TaskDto task) {
         service.update(id, task);
         return "redirect:/tasks";
@@ -54,7 +54,7 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public String create(@Valid @ModelAttribute("newTask") TaskDto task) {
         service.create(task);
         return "redirect:/tasks";

@@ -35,7 +35,7 @@
     </div>
 </nav>
 <br>
-    <div th:class="${('/tasks'== #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
+    <div th:class="${('/tasks' == #httpServletRequest.requestURI or '/tasks/' == #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
          class="container col-md-12 show">
     <div class="caption1">
         <h1>Create task</h1>
