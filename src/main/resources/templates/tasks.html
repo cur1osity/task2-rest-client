@@ -54,7 +54,7 @@
         <button type="submit" class="btn btn-primary">Add task</button>
     </form>
 </div>
-<div th:each="task : ${tasksX}" th:class="${('/tasks/' + task.id != #httpServletRequest.requestURI) ? 'hidden' : 'show'}"
+<div th:each="task : ${tasks}" th:class="${('/tasks/' + task.id != #httpServletRequest.requestURI) ? 'hidden' : 'show'}"
      class="container col-md-12 hidden">
     <div class="caption2">
         <h1>Update task</h1>
@@ -77,7 +77,7 @@
 <div class="container-fluid">
     <table class="table table-striped">
         <thead>
-        <tr th:if="${not #lists.isEmpty(tasksX)}">
+        <tr th:if="${not #lists.isEmpty(tasks)}">
             <th>Title</th>
             <th>Description</th>
             <th>Start date</th>
@@ -89,7 +89,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="task : ${tasksX}">
+        <tr th:each="task : ${tasks}">
             <td th:classappend="|${('/tasks/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
                 th:text="${task.title}"></td>
             <td th:classappend="|${('/tasks/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
@@ -127,7 +127,7 @@
         </tr>
         </tbody>
     </table>
-    <hr th:if="${not #lists.isEmpty(tasksX)}">
+    <hr th:if="${not #lists.isEmpty(tasks)}">
 </div>
 </body>
 </html>

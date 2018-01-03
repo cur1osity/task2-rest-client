@@ -21,17 +21,16 @@ public class TaskController {
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("tasksX", service.findAll());
+        model.addAttribute("tasks", service.findAll());
         model.addAttribute("newTask", new TaskDto());
         return "tasks";
     }
 
     @GetMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
-    public String findOne(@PathVariable Long id, Model model)  {
-        model.addAttribute("tasksX", service.findAll());
+    public String findOne(Model model)  {
+        model.addAttribute("tasks", service.findAll());
         model.addAttribute("newTask", new TaskDto());
-        model.addAttribute("tasks", service.findTask(id));
         return "tasks";
     }
 

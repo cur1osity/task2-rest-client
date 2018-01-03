@@ -29,10 +29,6 @@ public class TaskService {
         return Arrays.stream(restTemplate.getForObject(resource, TaskDto[].class)).collect(Collectors.toList());
     }
 
-    public TaskDto findTask(Long id) {
-        return restTemplate.getForObject(idResource, TaskDto.class, id);
-    }
-
     public TaskDto update(Long id, TaskDto task) {
         return restTemplate.exchange(idResource, HttpMethod.PATCH, new HttpEntity<>(task), TaskDto.class, id).getBody();
     }
