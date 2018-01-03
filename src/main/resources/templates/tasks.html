@@ -69,7 +69,6 @@
         <input type="text" class="form-control" th:value="${task.description}" id="description"
                name="description"/>
         <!--<span th:if="${error != null}" th:text="${error}"></span>-->
-        <input type="hidden" name="id" th:value="${task.id}"/>
         <br>
         <button type="submit" class="btn btn-info">Update task</button>
     </form>
@@ -102,7 +101,6 @@
                 th:text="${task.endDate}"></td>
             <td>
                 <form th:method="patch" th:action="@{/tasks/} + ${task.id}">
-                    <input type="hidden" name="id" th:value="${task.id}"/>
                     <input type="hidden" name="title" th:value="${task.title}"/>
                     <input type="hidden" name="description" th:value="${task.description}"/>
                     <input type="checkbox" name="completed" th:checked="${task.completed}" onchange="form.submit()"/>
@@ -120,7 +118,6 @@
             </td>
             <td>
                 <form th:method="delete" th:action="@{/tasks/} + ${task.id}">
-                    <input type="hidden" name="id" th:value="${task.id}"/>
                     <button class="btn btn-default" type="submit" th:disabled="${'/tasks' != #httpServletRequest.requestURI} ? true : false">Delete</button>
                 </form>
             </td>
