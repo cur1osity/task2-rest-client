@@ -32,7 +32,6 @@ public class TaskController {
         model.addAttribute("tasksX", service.findAll());
         model.addAttribute("newTask", new TaskDto());
         model.addAttribute("tasks", service.findTask(id));
-        model.addAttribute("newTask", new TaskDto());
         return "tasks";
     }
 
