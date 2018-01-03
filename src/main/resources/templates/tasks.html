@@ -27,29 +27,35 @@
                     </a>
                     <ul class="dropdown-menu">
                         <form th:method="delete" th:action="@{/tasks}"><input type="submit"
-                                                                         value="           Delete all tasks           "
-                                                                         class="linkButton"/></form>
+                                                                              value="           Delete all tasks           "
+                                                                              class="linkButton"/></form>
                     </ul>
             </ul>
         </div>
     </div>
 </nav>
 <br>
-    <div th:class="${('/tasks' == #httpServletRequest.requestURI or '/tasks/' == #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
-         class="container col-md-12 show">
+<div th:class="${('/tasks' == #httpServletRequest.requestURI or '/tasks/' == #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
+     class="container col-md-12 show">
     <div class="caption1">
         <h1>Create task</h1>
+    </div>
+    <br>
+    <div class="alert alert-danger container col-md-6 col-md-offset-3" th:if="${error != null}">
+        <ul><p><b>The form contain error/s:</b></p>
+            <th>
+                <li th:each="item : *{error}" th:text="${item}"></li>
+            </th>
+        </ul>
     </div>
     <form class="formX col-md-6 col-md-offset-3" method="post" th:action="@{/tasks}" th:object="${newTask}">
         <label for="titleX">Title</label>
         <input type="text" placeholder="Please enter task title" class="form-control"
                th:field="*{title}" id="titleX"/>
-        <!--<span th:if="${error != null}" th:text="${error}"></span>-->
         <br>
         <label for="descriptionX">Description</label>
         <input type="text" th:field="*{description}" class="form-control" id="descriptionX"
                placeholder="Please enter task description"/>
-        <!--<span th:if="${error != null}" th:text="${error}"></span>-->
         <br>
         <button type="submit" class="btn btn-primary">Add task</button>
     </form>
@@ -118,7 +124,9 @@
             </td>
             <td>
                 <form th:method="delete" th:action="@{/tasks/} + ${task.id}">
-                    <button class="btn btn-default" type="submit" th:disabled="${'/tasks' != #httpServletRequest.requestURI} ? true : false">Delete</button>
+                    <button class="btn btn-default" type="submit"
+                            th:disabled="${'/tasks' != #httpServletRequest.requestURI} ? true : false">Delete
+                    </button>
                 </form>
             </td>
         </tr>

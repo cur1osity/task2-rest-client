@@ -1,5 +1,6 @@
 package com.cur1osity.task2restclient.controller;
 
+import com.cur1osity.task2restclient.domain.MessageDto;
 import com.cur1osity.task2restclient.domain.TaskDto;
 import com.cur1osity.task2restclient.service.TaskService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/tasks")
@@ -28,9 +31,10 @@ public class TaskController {
 
     @GetMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
-    public String findOne(Model model)  {
+    public String findOne(Model model, @PathVariable Long id )  {
         model.addAttribute("tasks", service.findAll());
         model.addAttribute("newTask", new TaskDto());
+        model.addAttribute("task", service.findTask(id));
         return "tasks";
     }
 
@@ -58,11 +62,11 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
-//    @ExceptionHandler(HttpClientErrorException.class)
-//    public String handleClientError(HttpClientErrorException ex, Model model) throws IOException {
-//        MessageDTO dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDTO.class);
-//        model.addAttribute("error", dto.getMessage());
-//        return findAll(model);
-//    }
+    @ExceptionHandler(HttpClientErrorException.class)
+    public String handleClientError(HttpClientErrorException ex, Model model) throws IOException {
+        MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
+        model.addAttribute("error", dto.getMessages());
+        return findAll(model);
+    }
 
 }
