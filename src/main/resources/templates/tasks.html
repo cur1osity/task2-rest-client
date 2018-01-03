@@ -59,7 +59,7 @@
     <div class="caption2">
         <h1>Update task</h1>
     </div>
-    <form class="formX col-md-6 col-md-offset-3" th:method="patch" th:action="@{/tasks}">
+    <form class="formX col-md-6 col-md-offset-3" th:method="patch" th:action="@{/tasks/} + ${task.id}">
         <label for="title">Title</label>
         <input type="text" class="form-control" th:value="${task.title}"
                id="title" name="title"/>
@@ -101,7 +101,7 @@
             <td th:classappend="|${('/tasks/' + task.id == #httpServletRequest.requestURI) ? 'table_text' : 'table_text2'} ${task.isCompleted() ? 'table_text_completed' : 'table_text2'}|"
                 th:text="${task.endDate}"></td>
             <td>
-                <form th:method="patch" th:action="@{/tasks}">
+                <form th:method="patch" th:action="@{/tasks/} + ${task.id}">
                     <input type="hidden" name="id" th:value="${task.id}"/>
                     <input type="hidden" name="title" th:value="${task.title}"/>
                     <input type="hidden" name="description" th:value="${task.description}"/>
@@ -119,7 +119,7 @@
                 </a>
             </td>
             <td>
-                <form th:method="delete" th:action="@{/tasks}">
+                <form th:method="delete" th:action="@{/tasks/} + ${task.id}">
                     <input type="hidden" name="id" th:value="${task.id}"/>
                     <button class="btn btn-default" type="submit" th:disabled="${'/tasks' != #httpServletRequest.requestURI} ? true : false">Delete</button>
                 </form>

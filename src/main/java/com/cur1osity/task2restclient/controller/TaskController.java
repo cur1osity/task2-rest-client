@@ -36,22 +36,14 @@ public class TaskController {
         return "tasks";
     }
 
-
-    @RequestMapping(method = RequestMethod.PUT)
-    public String update(@RequestParam Long id, TaskDto task) {
+    @RequestMapping(value = {"/{id}"}, method = RequestMethod.PATCH)
+    public String update(@PathVariable Long id, TaskDto task) {
         service.update(id, task);
         return "redirect:/tasks";
     }
 
-
-    @RequestMapping(method = RequestMethod.PATCH)
-    public String update2(@RequestParam Long id, TaskDto task) {
-        service.update2(id, task);
-        return "redirect:/tasks";
-    }
-
     @DeleteMapping({"/{id}"})
-    public String delete(@RequestParam Long id) {
+    public String delete(@PathVariable Long id) {
         service.delete(id);
         return "redirect:/tasks";
     }

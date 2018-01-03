@@ -33,12 +33,7 @@ public class TaskService {
         return restTemplate.getForObject(idResource, TaskDto.class, id);
     }
 
-
     public TaskDto update(Long id, TaskDto task) {
-        return restTemplate.exchange(idResource, HttpMethod.PUT, new HttpEntity<>(task), TaskDto.class, id).getBody();
-    }
-
-    public TaskDto update2(Long id, TaskDto task) {
         return restTemplate.exchange(idResource, HttpMethod.PATCH, new HttpEntity<>(task), TaskDto.class, id).getBody();
     }
 
