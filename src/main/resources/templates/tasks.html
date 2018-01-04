@@ -22,11 +22,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a th:href="@{/tasks}">Home</a></li>
                 <li class="dropdown">
-                    <a href="#" th:class="${(tasks!=null) ? 'show' : 'hidden'}" class="dropdown-toggle black_link" data-toggle="dropdown">
+                    <a href="#" th:class="${(tasks!=null) ? 'show' : 'hidden'}" class="dropdown-toggle black_link"
+                       data-toggle="dropdown">
                         Settings <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <form  th:method="delete" th:action="@{/tasks}"><input type="submit"
+                        <form th:method="delete" th:action="@{/tasks}"><input type="submit"
                                                                               value="           Delete all tasks           "
                                                                               class="linkButton"/></form>
                     </ul>
@@ -37,22 +38,31 @@
 <br>
 <br>
 <div th:switch="${message_post}">
-    <div class="alert alert-success" th:case="'success'"
-    <span>Task was <b>created</b> !</span></div>
+    <div class="alert alert-success" th:case="'success'">
+        <span>Task was <b>created</b> !</span></div>
 </div>
 <div th:switch="${message_delete}">
-    <div class="alert alert-success" th:case="'success'"
-    <span>Task was <b>deleted</b> !</span></div>
+    <div class="alert alert-warning" th:case="'success'">
+        <span>Task was <b>deleted</b> !</span></div>
 </div>
 <div th:switch="${message_update}">
-    <div class="alert alert-success" th:case="'success'"
-    <span>Task was <b>updated</b> !</span></div>
+    <div class="alert alert-success" th:case="'success'">
+        <span>Task was <b>updated</b> !</span></div>
 </div>
 <div th:switch="${message_deleteAll}">
-    <div class="alert alert-success" th:case="'success'"
-    <span>All tasks were <b>deleted</b> !</span></div>
+    <div class="alert alert-warning" th:case="'success'">
+        <span>All tasks were <b>deleted</b> !</span></div>
 </div>
-<div class="alert alert-success" th:if="${tasks == null}">Couldn't connect to API !</div>
+<div th:switch="${taskError}">
+    <div th:if="${'/tasks' != #httpServletRequest.requestURI}">
+        <div class="alert alert-warning" th:case="'fail'">
+            <p><b>Task doesn't exist! </b></p>
+            <p>Please press "Home" button to cancel.</p>
+        </div>
+    </div>
+</div>
+<div class="alert alert-info" th:if="${tasks == null}"> Couldn't connect to API ! Please refresh page to try again.
+</div>
 <br>
 <div th:class="${('/tasks' == #httpServletRequest.requestURI or '/tasks/' == #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
      class="container col-md-12 show">
@@ -75,7 +85,7 @@
         <input type="text" th:field="*{description}" class="form-control" id="descriptionX"
                placeholder="Please enter task description"/>
         <br>
-        <button th:disabled="${tasks == null} ? true : false"  type="submit" class="btn btn-primary">Add task</button>
+        <button th:disabled="${tasks == null} ? true : false" type="submit" class="btn btn-primary">Add task</button>
     </form>
 </div>
 <div th:each="task : ${tasks}" th:class="${('/tasks/' + task.id != #httpServletRequest.requestURI) ? 'hidden' : 'show'}"

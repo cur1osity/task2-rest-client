@@ -1,4 +1,6 @@
-server:
-  port: 8081
 resource:
   tasks: http://localhost:8080/v1/tasks
+server:
+  port: 8081
+  session:
+    tracking-modes: cookie

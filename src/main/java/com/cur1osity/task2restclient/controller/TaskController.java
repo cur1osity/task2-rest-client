@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
@@ -39,7 +38,7 @@ public class TaskController {
     }
 
     @PatchMapping({"/{id}"})
-    public String update(@Valid @PathVariable Long id, TaskDto task, RedirectAttributes model) {
+    public String update(@PathVariable Long id, TaskDto task, RedirectAttributes model) {
         model.addFlashAttribute("message_update", "success");
         service.update(id, task);
         return "redirect:/tasks";
@@ -60,7 +59,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public String create(@Valid @ModelAttribute("newTask") TaskDto task, RedirectAttributes model) {
+    public String create(@ModelAttribute("newTask") TaskDto task, RedirectAttributes model) {
         model.addFlashAttribute("message_post","success");
         service.create(task);
         return "redirect:/tasks";
@@ -70,6 +69,7 @@ public class TaskController {
     public String handleClientError(HttpClientErrorException ex, Model model) throws IOException {
         MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
         model.addAttribute("error", dto.getMessages());
+        model.addAttribute("taskError","fail");
         return findAll(model);
     }
 
