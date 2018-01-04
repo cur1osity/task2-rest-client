@@ -54,7 +54,7 @@
         <span>All tasks were <b>deleted</b> !</span></div>
 </div>
 <div th:switch="${taskError}">
-    <div th:if="${'/tasks' != #httpServletRequest.requestURI}">
+    <div th:each="task : ${tasks}" th:if="${(#httpServletRequest.getMethod() == 'GET')}">
         <div class="alert alert-warning" th:case="'fail'">
             <p><b>Task doesn't exist! </b></p>
             <p>Please press "Home" button to cancel.</p>
@@ -90,15 +90,14 @@
 </div>
 <div th:each="task : ${tasks}" th:class="${('/tasks/' + task.id != #httpServletRequest.requestURI) ? 'hidden' : 'show'}"
      class="container col-md-12 hidden">
-
+    <div class="caption2">
+        <h1>Update task</h1>
+    </div>
+    <br>
     <div class="alert alert-danger container col-md-6 col-md-offset-3" th:if="${error != null}">
         <ul><p><b>The form contains error/s:</b></p>
             <li th:each="item : *{error}" th:text="${item}"></li>
         </ul>
-    </div>
-
-    <div class="caption2">
-        <h1>Update task</h1>
     </div>
     <form class="formX col-md-6 col-md-offset-3" th:method="patch" th:action="@{/tasks/} + ${task.id}">
         <label for="title">Title</label>
