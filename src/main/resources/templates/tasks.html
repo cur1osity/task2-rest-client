@@ -53,27 +53,22 @@
     <div class="alert alert-warning" th:case="'success'">
         <span>All tasks were <b>deleted</b> !</span></div>
 </div>
-<div th:switch="${taskError}">
-    <div th:each="task : ${tasks}" th:if="${(#httpServletRequest.getMethod() == 'GET')}">
-        <div class="alert alert-warning" th:case="'fail'">
-            <p><b>Task doesn't exist! </b></p>
-            <p>Please press "Home" button to cancel.</p>
-        </div>
-    </div>
+<div class="alert alert-warning" th:if="${not_found_error != null}">
+    <p><b>Task doesn't exist! </b></p>
+    <p>Please press "Home" button to cancel.</p>
 </div>
-<div class="alert alert-info" th:if="${tasks == null}"> Couldn't connect to API ! Please refresh page to try again.
+<div class="alert alert-warning" th:if="${tasks == null}"> Couldn't connect to API ! Please refresh page to try again.
 </div>
 <br>
 <div th:class="${('/tasks' == #httpServletRequest.requestURI or '/tasks/' == #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
      class="container col-md-12 show">
-
     <div class="caption1">
         <h1>Create task</h1>
     </div>
     <br>
-    <div class="alert alert-danger container col-md-6 col-md-offset-3" th:if="${error != null}">
+    <div class="alert alert-danger container col-md-6 col-md-offset-3" th:if="${bad_request_error != null}">
         <ul><p><b>The form contains error/s:</b></p>
-            <li th:each="item : *{error}" th:text="${item}"></li>
+            <li th:each="item : *{bad_request_error}" th:text="${item}"></li>
         </ul>
     </div>
     <form class="formX col-md-6 col-md-offset-3" method="post" th:action="@{/tasks}" th:object="${newTask}">
@@ -94,9 +89,9 @@
         <h1>Update task</h1>
     </div>
     <br>
-    <div class="alert alert-danger container col-md-6 col-md-offset-3" th:if="${error != null}">
+    <div class="alert alert-danger container col-md-6 col-md-offset-3" th:if="${bad_request_error != null}">
         <ul><p><b>The form contains error/s:</b></p>
-            <li th:each="item : *{error}" th:text="${item}"></li>
+            <li th:each="item : *{bad_request_error}" th:text="${item}"></li>
         </ul>
     </div>
     <form class="formX col-md-6 col-md-offset-3" th:method="patch" th:action="@{/tasks/} + ${task.id}">

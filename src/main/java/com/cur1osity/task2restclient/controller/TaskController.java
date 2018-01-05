@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 
@@ -65,12 +65,18 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
-    @ExceptionHandler(HttpClientErrorException.class)
-    public String handleClientError(HttpClientErrorException ex, Model model) throws IOException {
-        MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
-        model.addAttribute("error", dto.getMessages());
-        model.addAttribute("taskError","fail");
+    @ExceptionHandler(HttpStatusCodeException.class)
+    public String handleClientError(HttpStatusCodeException ex, Model model) throws IOException {
+        if(ex.getStatusCode() == HttpStatus.BAD_REQUEST) {
+            MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
+            model.addAttribute("bad_request_error", dto.getMessages());
+            return findAll(model);
+        }
+
+        if(ex.getStatusCode() == HttpStatus.NOT_FOUND) {
+            MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
+            model.addAttribute("not_found_error", dto.getMessages());
+        }
         return findAll(model);
     }
-
 }
