@@ -1,25 +1,21 @@
 package com.cur1osity.task2restclient.controller;
 
-import com.cur1osity.task2restclient.domain.MessageDto;
 import com.cur1osity.task2restclient.domain.TaskDto;
 import com.cur1osity.task2restclient.service.TaskService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import java.io.IOException;
+
 
 @Controller
 @RequestMapping("/tasks")
 public class TaskController {
+
     @Autowired
     private TaskService service;
-    @Autowired
-    private ObjectMapper mapper;
 
     @GetMapping
     public String findAll(Model model) {
@@ -63,20 +59,5 @@ public class TaskController {
         model.addFlashAttribute("message_post","success");
         service.create(task);
         return "redirect:/tasks";
-    }
-
-    @ExceptionHandler(HttpStatusCodeException.class)
-    public String handleClientError(HttpStatusCodeException ex, Model model) throws IOException {
-        if(ex.getStatusCode() == HttpStatus.BAD_REQUEST) {
-            MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
-            model.addAttribute("bad_request_error", dto.getMessages());
-            return findAll(model);
-        }
-
-        if(ex.getStatusCode() == HttpStatus.NOT_FOUND) {
-            MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
-            model.addAttribute("not_found_error", dto.getMessages());
-        }
-        return findAll(model);
     }
 }
