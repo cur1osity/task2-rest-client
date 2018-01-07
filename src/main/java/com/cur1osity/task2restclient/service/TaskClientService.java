@@ -64,14 +64,7 @@ public class TaskClientService {
         restTemplate.delete(resource);
     }
 
-    public TaskDto findTask(Long id) throws ServiceUnavailableEx {
-
-        try {
-            restTemplate.getForObject(idResource, TaskDto.class, id);
-        } catch (ResourceAccessException ex) {
-            LOGGER.error(ex.getMessage(), ex);
-            throw new ServiceUnavailableEx();
-        }
+    public TaskDto findTask(Long id) {
         return restTemplate.getForObject(idResource, TaskDto.class, id);
     }
 }
