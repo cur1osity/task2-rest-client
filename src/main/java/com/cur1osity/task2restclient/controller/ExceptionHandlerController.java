@@ -29,11 +29,6 @@ public class ExceptionHandlerController {
             MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
             model.addAttribute("not_found_error", dto.getMessages());
         }
-        if(ex.getStatusCode() == HttpStatus.SERVICE_UNAVAILABLE) {
-            MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
-            model.addAttribute("service_unavailable_error", dto.getMessages());
-        }
-
         return taskController.findAll(model);
     }
 }

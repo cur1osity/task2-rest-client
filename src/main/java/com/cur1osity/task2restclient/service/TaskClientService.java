@@ -74,8 +74,4 @@ public class TaskClientService {
         }
         return restTemplate.getForObject(idResource, TaskDto.class, id);
     }
-
-    public TaskDto findTaskifServiceUnavailable(Long id) {
-            return new TaskDto();
-    }
 }

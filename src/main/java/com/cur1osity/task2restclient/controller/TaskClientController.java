@@ -21,11 +21,10 @@ public class TaskClientController {
     public String findAll(Model model) {
         try {
             model.addAttribute("tasks", service.findAll());
+            model.addAttribute("newTask", new TaskDto());
         } catch (ServiceUnavailableEx ex) {
-            model.addAttribute("tasks", service.findAllifServiceUnavailable());
+            noService(model);
         }
-        model.addAttribute("newTask", new TaskDto());
-
         return "tasks";
     }
 
@@ -35,12 +34,18 @@ public class TaskClientController {
         try {
             model.addAttribute("tasks", service.findAll());
             model.addAttribute("task", service.findTask(id));
-        } catch (ServiceUnavailableEx ex) {
-            model.addAttribute("tasks", service.findAllifServiceUnavailable());
-            model.addAttribute("task", service.findTaskifServiceUnavailable(id));
             model.addAttribute("newTask", new TaskDto());
+        } catch (ServiceUnavailableEx ex) {
+            noService(model);
         }
+        return "tasks";
+    }
+
+    @GetMapping({"/noService"})
+    public String noService(Model model) {
+        model.addAttribute("tasks", service.findAllifServiceUnavailable());
         model.addAttribute("newTask", new TaskDto());
+        model.addAttribute("noService", "serviceUnvailable");
         return "tasks";
     }
 

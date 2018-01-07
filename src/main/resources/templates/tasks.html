@@ -22,7 +22,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a th:href="@{/tasks}">Home</a></li>
                 <li class="dropdown">
-                    <a href="#" th:class="${(tasks!=null) ? 'show' : 'hidden'}" class="dropdown-toggle black_link"
+                    <a href="#" th:class="${(noService == null) ? 'show' : 'hidden'}" class="dropdown-toggle black_link"
                        data-toggle="dropdown">
                         Settings <b class="caret"></b>
                     </a>
@@ -57,7 +57,7 @@
     <p><b>Task doesn't exist! </b></p>
     <p>Please press "Home" button to cancel.</p>
 </div>
-<div class="alert alert-warning" th:if="${tasks == null}"> Couldn't connect to API ! Please refresh page to try again.
+<div class="alert alert-warning" th:if="${noService != null}"><b>Couldn't connect to API ! </b> Please refresh page to try again.
 </div>
 <br>
 <div th:class="${('/tasks' == #httpServletRequest.requestURI or '/tasks/' == #httpServletRequest.requestURI) ? 'show' : 'hidden'}"
@@ -80,7 +80,7 @@
         <input type="text" th:field="*{description}" class="form-control" id="descriptionX"
                placeholder="Please enter task description"/>
         <br>
-        <button th:disabled="${tasks == null} ? true : false" type="submit" class="btn btn-primary">Add task</button>
+        <button th:disabled="${noService != null} ? true : false" type="submit" class="btn btn-primary">Add task</button>
     </form>
 </div>
 <div th:each="task : ${tasks}" th:class="${('/tasks/' + task.id != #httpServletRequest.requestURI) ? 'hidden' : 'show'}"
