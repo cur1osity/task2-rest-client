@@ -1,7 +1,7 @@
 package com.cur1osity.task2restclient.controller;
 
 import com.cur1osity.task2restclient.domain.TaskDto;
-import com.cur1osity.task2restclient.service.TaskService;
+import com.cur1osity.task2restclient.service.TaskClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -12,26 +12,46 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/tasks")
-public class TaskController {
+public class TaskClientController {
 
     @Autowired
-    private TaskService service;
+    private TaskClientService service;
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("tasks", service.findAll());
+
+        try {
+            model.addAttribute("tasks", service.findAll());
+
+        } catch (ServiceUnavailableEx ex) {
+
+            model.addAttribute("tasks", service.findAllifServiceUnavailable());
+        }
+
         model.addAttribute("newTask", new TaskDto());
+
         return "tasks";
     }
 
     @GetMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
-    public String findOne(Model model, @PathVariable Long id )  {
-        model.addAttribute("tasks", service.findAll());
-        model.addAttribute("newTask", new TaskDto());
-        model.addAttribute("task", service.findTask(id));
+    public String findOne(Model model, @PathVariable Long id) {
+
+        try {
+
+            model.addAttribute("tasks", service.findAll());
+            model.addAttribute("task", service.findTask(id));
+
+        } catch(ServiceUnavailableEx ex) {
+
+            model.addAttribute("tasks", service.findAllifServiceUnavailable());
+            model.addAttribute("task", service.findTaskifServiceUnavailable(id));
+            model.addAttribute("newTask", new TaskDto());
+        }
+
         return "tasks";
     }
+
 
     @PatchMapping({"/{id}"})
     public String update(@PathVariable Long id, TaskDto task, RedirectAttributes model) {
@@ -56,8 +76,9 @@ public class TaskController {
 
     @PostMapping
     public String create(@ModelAttribute("newTask") TaskDto task, RedirectAttributes model) {
-        model.addFlashAttribute("message_post","success");
+        model.addFlashAttribute("message_post", "success");
         service.create(task);
         return "redirect:/tasks";
     }
+
 }
