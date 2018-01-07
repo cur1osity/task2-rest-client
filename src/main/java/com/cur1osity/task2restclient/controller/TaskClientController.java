@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+
 
 @Controller
 @RequestMapping("/tasks")
@@ -43,7 +45,7 @@ public class TaskClientController {
 
     @GetMapping({"/noService"})
     public String noService(Model model) {
-        model.addAttribute("tasks", service.findAllifServiceUnavailable());
+        model.addAttribute("tasks", new ArrayList<>());
         model.addAttribute("newTask", new TaskDto());
         model.addAttribute("noService", "serviceUnvailable");
         return "tasks";
