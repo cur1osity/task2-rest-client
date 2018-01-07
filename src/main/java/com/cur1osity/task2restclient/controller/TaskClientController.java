@@ -19,15 +19,11 @@ public class TaskClientController {
 
     @GetMapping
     public String findAll(Model model) {
-
         try {
             model.addAttribute("tasks", service.findAll());
-
         } catch (ServiceUnavailableEx ex) {
-
             model.addAttribute("tasks", service.findAllifServiceUnavailable());
         }
-
         model.addAttribute("newTask", new TaskDto());
 
         return "tasks";
@@ -36,19 +32,15 @@ public class TaskClientController {
     @GetMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
     public String findOne(Model model, @PathVariable Long id) {
-
         try {
-
             model.addAttribute("tasks", service.findAll());
             model.addAttribute("task", service.findTask(id));
-
-        } catch(ServiceUnavailableEx ex) {
-
+        } catch (ServiceUnavailableEx ex) {
             model.addAttribute("tasks", service.findAllifServiceUnavailable());
             model.addAttribute("task", service.findTaskifServiceUnavailable(id));
             model.addAttribute("newTask", new TaskDto());
         }
-
+        model.addAttribute("newTask", new TaskDto());
         return "tasks";
     }
 

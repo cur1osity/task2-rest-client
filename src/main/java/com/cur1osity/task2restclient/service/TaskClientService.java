@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,30 +31,20 @@ public class TaskClientService {
     private RestTemplate restTemplate;
 
 
-    public List<TaskDto> findAll() throws ResourceAccessException, HttpClientErrorException, ServiceUnavailableEx {
-
-            try {
-                Arrays.stream(restTemplate.getForObject(resource, TaskDto[].class)).collect(Collectors.toList());
-            } catch (ResourceAccessException ex) {
-                LOGGER.error(ex.getMessage(), ex);
-                throw new ServiceUnavailableEx();
-            }
-
-            return Arrays.stream(restTemplate.getForObject(resource, TaskDto[].class)).collect(Collectors.toList());
-        }
-
-
-
-    public List<TaskDto> findAllifServiceUnavailable() throws ResourceAccessException, HttpClientErrorException {
+    public List<TaskDto> findAll() throws ServiceUnavailableEx {
 
         try {
-            Arrays.stream(restTemplate.getForObject(resource, TaskDto[].class)).collect(Collectors.toList());
+            restTemplate.getForObject(resource, TaskDto[].class);
         } catch (ResourceAccessException ex) {
             LOGGER.error(ex.getMessage(), ex);
-            return new ArrayList<>();
+            throw new ServiceUnavailableEx();
         }
-
         return Arrays.stream(restTemplate.getForObject(resource, TaskDto[].class)).collect(Collectors.toList());
+    }
+
+
+    public List<TaskDto> findAllifServiceUnavailable() {
+            return new ArrayList<>();
     }
 
 
@@ -69,15 +57,14 @@ public class TaskClientService {
     }
 
     public TaskDto create(TaskDto task) {
-
         return restTemplate.postForObject(resource, task, TaskDto.class);
     }
 
-    public void deleteAllTask(){
+    public void deleteAllTask() {
         restTemplate.delete(resource);
     }
 
-    public TaskDto findTask(Long id) throws ResourceAccessException, ServiceUnavailableEx {
+    public TaskDto findTask(Long id) throws ServiceUnavailableEx {
 
         try {
             restTemplate.getForObject(idResource, TaskDto.class, id);
@@ -88,14 +75,7 @@ public class TaskClientService {
         return restTemplate.getForObject(idResource, TaskDto.class, id);
     }
 
-    public TaskDto findTaskifServiceUnavailable(Long id) throws ResourceAccessException {
-
-        try {
-            restTemplate.getForObject(idResource, TaskDto.class, id);
-        } catch (ResourceAccessException ex) {
-            LOGGER.error(ex.getMessage(), ex);
+    public TaskDto findTaskifServiceUnavailable(Long id) {
             return new TaskDto();
-        }
-        return restTemplate.getForObject(idResource, TaskDto.class, id);
     }
 }

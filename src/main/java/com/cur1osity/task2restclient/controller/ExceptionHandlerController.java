@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpStatusCodeException;
-
-import javax.naming.ServiceUnavailableException;
 import java.io.IOException;
 
 @ControllerAdvice
@@ -26,7 +24,6 @@ public class ExceptionHandlerController {
         if(ex.getStatusCode() == HttpStatus.BAD_REQUEST) {
             MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
             model.addAttribute("bad_request_error", dto.getMessages());
-            return taskController.findAll(model);
         }
         if(ex.getStatusCode() == HttpStatus.NOT_FOUND) {
             MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
@@ -35,7 +32,6 @@ public class ExceptionHandlerController {
         if(ex.getStatusCode() == HttpStatus.SERVICE_UNAVAILABLE) {
             MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
             model.addAttribute("service_unavailable_error", dto.getMessages());
-            return taskController.findAll(model);
         }
 
         return taskController.findAll(model);
