@@ -10,8 +10,8 @@ server:
 spring:
   profiles: container
 resource:
-  tasks: http://task2-rest-api-docker:8080/v1/tasks
+  tasks: http://${API_HOST}:${API_PORT}/v1/tasks
 server:
-  port: 8081
+  port: ${CLIENT_PORT}
   session:
     tracking-modes: cookie
