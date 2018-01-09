@@ -3,4 +3,15 @@ resource:
 server:
   port: 8081
   session:
+   tracking-modes: cookie
+
+---
+
+spring:
+  profiles: container
+resource:
+  tasks: http://task2-rest-api-docker:8080/v1/tasks
+server:
+  port: 8081
+  session:
     tracking-modes: cookie
