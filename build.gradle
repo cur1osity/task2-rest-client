@@ -31,7 +31,6 @@ ext {
 	springCloudVersion = 'Finchley.M5'
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-validation')
