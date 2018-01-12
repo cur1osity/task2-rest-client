@@ -20,12 +20,12 @@ server:
   port: ${CLIENT_PORT}
   session:
     tracking-modes: cookie
-eureka:
-    instance:
-      ip-address: ${EUREKA_HOSTNAME}
-      prefer-ip-address: true
-      status-page-url-path: /actuator/info
-    client:
-      serviceUrl:
-        defaultZone:
-          http://${EUREKA_HOSTNAME}:8761/eureka
+#eureka:
+#    instance:
+#      ip-address: ${EUREKA_HOSTNAME}
+#      prefer-ip-address: true
+#      status-page-url-path: /actuator/info
+#    client:
+#      serviceUrl:
+#        defaultZone:
+#          http://${EUREKA_HOSTNAME}:8761/eureka

@@ -35,7 +35,6 @@ body {
 }
 
 .dropdown-menu:hover {
-    background-color: #ff5733 !important;
     color:white !important;
 }
 
@@ -192,6 +191,18 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
+.swagger_link {
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+
+
+
 
 
 
