@@ -1,6 +1,5 @@
 package com.cur1osity.task2restclient.service;
 
-
 import com.cur1osity.task2restclient.domain.TrelloBoardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,8 +16,8 @@ public class TrelloClientService {
     @Value("${resource.trelloBoards}")
     private String resource;
 
-//    @Value("${resource.tasks}/{id}")
-//    private String idResource;
+    @Value("${resource.trelloBoards}/{id}")
+    private String idResource;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -26,8 +25,14 @@ public class TrelloClientService {
 
     public List<TrelloBoardDto> findAll()  {
 
-            restTemplate.getForObject(resource, TrelloBoardDto[].class);
+//            restTemplate.getForObject(resource, TrelloBoardDto[].class);
 
         return Arrays.stream(restTemplate.getForObject(resource, TrelloBoardDto[].class)).collect(Collectors.toList());
     }
+
+    public TrelloBoardDto findOne(String id)  {
+
+        return restTemplate.getForObject(idResource, TrelloBoardDto.class, id);
+    }
+
 }

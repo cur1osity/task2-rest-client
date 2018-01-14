@@ -13,6 +13,7 @@
     <title>Tasks application</title>
 </head>
 <body>
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -20,26 +21,29 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a th:href="@{/tasks}">Home</a></li></ul>
+                <li class="active"><a th:href="@{/tasks}">Home</a></li>
+            </ul>
         </div>
     </div>
 </nav>
 <br>
 <br>
-<div th:each="trelloBoard : ${trelloBoards}" th:text = "${trelloBoard.name}"></div>
-<div th:each="trelloBoard : ${trelloBoards}" th:text = "${trelloBoard.lists.get(1).getName()}"></div>
 
-<fieldset class="datatable__row-section datatable__row-section--trello-section">
-    <select class="datatable__select" name="board-name" data-board-name-select>
-        <option disabled selected>--- select an board ---</option>
+
+<div class="col-sm-2">
+<select class="form-control" onchange="if (this.value) window.location.href = '/trello/' + this.value">
+    <option value = " ">Select a Trello Board</option>
+    <option  th:each="trelloBoard : ${trelloBoards}" th:value="${trelloBoard.id}" th:text="${trelloBoard.name}" th:selected="${'/trello/' + trelloBoard.id == #httpServletRequest.requestURI} ? trelloBoard.name : null" >[name]</option>
+</select>
+</div>
+
+
+<div class="col-sm-2" th:each="board : ${trelloBoards}" th:if="${('/trello/' + board.id == #httpServletRequest.requestURI)}">
+    <select class="form-control">
+        <option th:each = "list : ${board.lists}" th:text = "${list.name}"></option>
     </select>
-    <select class="datatable__select" name="list-name" data-list-name-select>
-        <option disabled selected>--- select a list ---</option>
-    </select>
-    <button type="button" data-trello-card-creation-trigger class="datatable__button datatable__button--card-creation">
-        Create a card
-    </button>
-</fieldset>
+</div>
+
 
 <div th:each="task : ${tasks}" class="container-fluid">
     <table class="table table-striped">

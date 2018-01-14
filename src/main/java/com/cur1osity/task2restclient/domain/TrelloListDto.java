@@ -10,6 +10,9 @@ import lombok.Getter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class TrelloListDto {
+
+    private int idX;
+
     @JsonProperty("id")
     private String id;
 

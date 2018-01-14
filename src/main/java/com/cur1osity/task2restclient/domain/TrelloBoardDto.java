@@ -12,6 +12,8 @@ import java.util.List;
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class TrelloBoardDto {
 
+    private int idX;
+
     @JsonProperty("id")
     private String id;
 
