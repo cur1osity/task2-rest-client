@@ -27,7 +27,7 @@
                         Settings <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="swagger_link" href="trello">Trello</a></li>
+                        <li><a class="swagger_link" th:href="@{/trello}">Go to Trello page</a></li>
                         <li><a class="swagger_link" href="http://localhost:8080/swagger-ui.html">Swagger-ui</a></li>
                         <li><a href="javascript:document.forms[0].submit()">Delete all tasks</a></li>
                         <form id="delete_form" th:method="delete" th:action="@{/tasks}"></form>

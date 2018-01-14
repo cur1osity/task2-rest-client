@@ -30,6 +30,9 @@
 <br>
 <br>
 <br>
+<div class="alert alert-warning container col-md-12" th:if="${bad_request_error != null}">
+        <p th:each="item : *{bad_request_error}" th:text="${item}"></p>
+</div>
 <div class="container-fluid">
     <table class="table table-striped">
         <thead>
