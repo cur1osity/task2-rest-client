@@ -1,6 +1,7 @@
 package com.cur1osity.task2restclient.service;
 
 import com.cur1osity.task2restclient.domain.TrelloBoardDto;
+import com.cur1osity.task2restclient.domain.TrelloCardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,10 @@ public class TrelloClientService {
     public TrelloBoardDto findOne(String id)  {
 
         return restTemplate.getForObject(idResource, TrelloBoardDto.class, id);
+    }
+
+    public TrelloCardDto createTrelloCard(TrelloCardDto trelloCardDto) {
+        return restTemplate.postForObject(resource, trelloCardDto, TrelloCardDto.class);
     }
 
 }
