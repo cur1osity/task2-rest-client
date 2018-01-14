@@ -32,13 +32,14 @@ public class TrelloController {
         return "trello";
     }
 
-    @GetMapping("/{id}")
-    public String findOne(Model model, @PathVariable String id) {
+    @GetMapping("/{id}/{boardId}")
+    public String findOne(Model model, @PathVariable Long id, @PathVariable String boardId) {
         try {
             model.addAttribute("tasks", service.findAll());
             model.addAttribute("newTask", new TaskDto());
-            model.addAttribute("trelloBoard", trelloClientService.findOne(id));
+            model.addAttribute("trelloBoard", trelloClientService.findOne(boardId));
             model.addAttribute("trelloBoards", trelloClientService.findAll());
+            model.addAttribute("task",service.findTask(id));
         } catch (ServiceUnavailableEx ex) {
 //            noService(model);
         }

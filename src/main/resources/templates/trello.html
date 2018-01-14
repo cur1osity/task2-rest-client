@@ -30,42 +30,49 @@
 <br>
 <br>
 <br>
-<div th:each="task : ${tasks}" class="container-fluid">
+<div class="container-fluid">
     <table class="table table-striped">
         <thead>
         <tr th:if="${not #lists.isEmpty(tasks)}">
             <th>Title</th>
             <th>Description</th>
-            <th>Select Trello Board</th>
-            <th>Select Trello List</th>
-            <th>Create Trello Card</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="task : ${tasks}">
-            <td th:text="${task.title}"></td>
-            <td th:text="${task.description}"></td>
+            <td class="col-md-2" th:text="${task.title}"></td>
+            <td class="col-md-4" th:text="${task.description}"></td>
             <td>
-                <div class="col-sm-6">
-                    <select class="form-control" onchange="if (this.value) window.location.href = '/trello/' + this.value">
-                        <option value = " ">Select a Trello Board</option>
-                        <option  th:each="trelloBoard : ${trelloBoards}" th:value="${trelloBoard.id}" th:text="${trelloBoard.name}" th:selected="${'/trello/' + trelloBoard.id == #httpServletRequest.requestURI} ? trelloBoard.name : null" >[name]</option>
+                <div class="col-md-5">
+                    <select class="form-control"
+                            onchange="if (this.value) window.location.href = '/trello/' + this.value">
+                        <option value=" ">Select Trello Board</option>
+                        <option th:each="trelloBoard : ${trelloBoards}" th:value="${task.id + '/' + trelloBoard.id}"
+                                th:text="${trelloBoard.name}"
+                                th:selected="${'/trello/' + task.id + '/' + trelloBoard.id == #httpServletRequest.requestURI} ? trelloBoard.name : null">
+                            [name]
+                        </option>
                     </select>
                 </div>
-            </td>
-                <td class="col-sm-6" th:each="board : ${trelloBoards}" th:if="${('/trello/' + board.id == #httpServletRequest.requestURI)}">
-                    <form id = "listForm" th:method="post" th:action="@{/trello}" th:object="${newTrelloCard}">
-                    <select name ="listId" class="form-control">
-                        <option th:each = "list : ${board.lists}" th:text = "${list.name}" th:value="${list.id}" ></option>
+            <div class="col-md-5" th:each="board : ${trelloBoards}"
+                th:if="${('/trello/' + task.id + '/' + board.id == #httpServletRequest.requestURI)}">
+                <form id="listForm" th:method="post" th:action="@{/trello}" th:object="${newTrelloCard}">
+                    <select name="listId" class="form-control">
+                        <option value=" ">Select Trello List</option>
+                        <option th:each="list : ${board.lists}" th:text="${list.name}" th:value="${list.id}"></option>
                     </select>
-                        <input type="hidden" name="name" th:value="${task.title}"/>
-                        <input type="hidden" name="description" th:value="${task.description}"/>
-                        <!--<input th:each = "list : ${board.lists}" type="hidden" name="listId" th:value="${list.id}"/>-->
-                    </form>
-                </td>
+                    <input type="hidden" name="name" th:value="${task.title}"/>
+                    <input type="hidden" name="description" th:value="${task.description}"/>
+                </form>
+            </div>
             </td>
             <td>
-                <button class="btn btn-default" form="listForm" type="submit">Create Trello Card</button>
+                <div class="hidden" th:each="board : ${trelloBoards}"
+                     th:class="${('/trello/' + task.id + '/' + board.id != #httpServletRequest.requestURI) ? 'hidden' : 'show'}">
+                    <button class="btn btn-default" form="listForm" type="submit">Create Trello Card</button>
+                </div>
             </td>
         </tr>
         </tbody>
