@@ -38,7 +38,7 @@ public class ExceptionHandlerController {
             return taskController.findAll(model);
         }
 
-        if (ex.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR) {
+        if (ex.getStatusCode() == HttpStatus.NOT_ACCEPTABLE) {
             MessageDto dto = mapper.readValue(ex.getResponseBodyAsByteArray(), MessageDto.class);
             model.addAttribute("bad_request_error", dto.getMessages());
             return trelloController.findAll(model);

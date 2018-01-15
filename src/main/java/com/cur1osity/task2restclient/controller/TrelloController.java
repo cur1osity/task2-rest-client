@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @Controller
 @RequestMapping("/trello")
 public class TrelloController {
@@ -25,9 +27,29 @@ public class TrelloController {
             model.addAttribute("tasks", service.findAll());
             model.addAttribute("newTask", new TaskDto());
             model.addAttribute("trelloBoards", trelloClientService.findAll());
-        } catch (ServiceUnavailableEx ex) {
-//            noService(model);
+        } catch (TaskServiceUnavailableEx ex) {
+            noTaskService(model);
+        } catch (TrelloServiceUnavailableEx ex) {
+            noTrelloService(model);
         }
+        return "trello";
+    }
+
+    @GetMapping({"/noTaskService"})
+    public String noTaskService(Model model) {
+        model.addAttribute("tasks", new ArrayList<>());
+        model.addAttribute("newTask", new TaskDto());
+        model.addAttribute("trelloBoards", new ArrayList<>());
+        model.addAttribute("noTaskService", "serviceUnvailable");
+        return "trello";
+    }
+
+    @GetMapping({"/noTrelloService"})
+    public String noTrelloService(Model model) {
+        model.addAttribute("tasks", new ArrayList<>());
+        model.addAttribute("newTask", new TaskDto());
+        model.addAttribute("trelloBoards", new ArrayList<>());
+        model.addAttribute("noTrelloService", "serviceUnvailable");
         return "trello";
     }
 
@@ -39,8 +61,10 @@ public class TrelloController {
             model.addAttribute("trelloBoard", trelloClientService.findOne(boardId));
             model.addAttribute("trelloBoards", trelloClientService.findAll());
             model.addAttribute("task",service.findTask(id));
-        } catch (ServiceUnavailableEx ex) {
-//            noService(model);
+        } catch (TaskServiceUnavailableEx ex) {
+            noTaskService(model);
+        } catch (TrelloServiceUnavailableEx ex) {
+            noTrelloService(model);
         }
         return "trello";
     }
@@ -53,8 +77,10 @@ public class TrelloController {
             model.addAttribute("newTask", new TaskDto());
             model.addAttribute("trelloBoards", trelloClientService.findAll());
             model.addAttribute("trelloCard", trelloClientService.createTrelloCard(trelloCardDto));
-        } catch (ServiceUnavailableEx ex) {
-//            noService(model);
+        } catch (TaskServiceUnavailableEx ex) {
+            noTaskService(model);
+        } catch (TrelloServiceUnavailableEx ex) {
+            noTrelloService(model);
         }
         return "trello";
     }

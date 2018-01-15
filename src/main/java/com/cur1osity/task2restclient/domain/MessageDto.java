@@ -1,23 +1,13 @@
 package com.cur1osity.task2restclient.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.List;
 
+@AllArgsConstructor
+@Getter
 public class MessageDto {
 
     private List<String> messages;
-
-    public MessageDto(List<String> messages) {
-        this.messages = messages;
-    }
-
-    public MessageDto() {
-    }
-
-    public List<String> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<String> messages) {
-        this.messages = messages;
-    }
 }

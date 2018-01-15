@@ -32,11 +32,19 @@
 <br>
 <br>
 <div class="alert alert-warning container col-md-12" th:if="${bad_request_error != null}">
-        <p th:each="item : *{bad_request_error}" th:text="${item}"></p>
+    <p th:each="item : *{bad_request_error}" th:text="${item}"></p>
 </div>
 <div class="alert alert-success container col-md-12" th:if="${trelloCard != null}">
     <p>Trello card was <b>created !</b></p>
     <a th:href="${trelloCard.shortUrl}" th:text="${trelloCard.shortUrl}"></a>
+</div>
+<div class="alert alert-warning" th:if="${noTaskService != null}"><b>Couldn't connect to API ! </b> Please refresh page
+    to
+    try again.
+</div>
+<div class="alert alert-warning" th:if="${noTrelloService != null}"><b>Couldn't connect to Trello Service ! </b> Please
+    refresh page to
+    try again.
 </div>
 <div class="container-fluid">
     <table class="table table-striped">
@@ -64,17 +72,18 @@
                         </option>
                     </select>
                 </div>
-            <div class="col-md-5" th:each="board : ${trelloBoards}"
-                th:if="${('/trello/' + task.id + '/' + board.id == #httpServletRequest.requestURI)}">
-                <form id="listForm" th:method="post" th:action="@{/trello}" th:object="${newTrelloCard}">
-                    <select name="listId" class="form-control">
-                        <option value=" ">Select Trello List</option>
-                        <option th:each="list : ${board.lists}" th:text="${list.name}" th:value="${list.id}"></option>
-                    </select>
-                    <input type="hidden" name="name" th:value="${task.title}"/>
-                    <input type="hidden" name="description" th:value="${task.description}"/>
-                </form>
-            </div>
+                <div class="col-md-5" th:each="board : ${trelloBoards}"
+                     th:if="${('/trello/' + task.id + '/' + board.id == #httpServletRequest.requestURI)}">
+                    <form id="listForm" th:method="post" th:action="@{/trello}" th:object="${newTrelloCard}">
+                        <select name="listId" class="form-control">
+                            <option value=" ">Select Trello List</option>
+                            <option th:each="list : ${board.lists}" th:text="${list.name}"
+                                    th:value="${list.id}"></option>
+                        </select>
+                        <input type="hidden" name="name" th:value="${task.title}"/>
+                        <input type="hidden" name="description" th:value="${task.description}"/>
+                    </form>
+                </div>
             </td>
             <td>
                 <div class="hidden" th:each="board : ${trelloBoards}"

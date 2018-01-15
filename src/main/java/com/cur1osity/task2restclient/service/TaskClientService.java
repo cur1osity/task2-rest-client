@@ -1,6 +1,6 @@
 package com.cur1osity.task2restclient.service;
 
-import com.cur1osity.task2restclient.controller.ServiceUnavailableEx;
+import com.cur1osity.task2restclient.controller.TaskServiceUnavailableEx;
 import com.cur1osity.task2restclient.domain.TaskDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,13 +30,13 @@ public class TaskClientService {
     private RestTemplate restTemplate;
 
 
-    public List<TaskDto> findAll() throws ServiceUnavailableEx {
+    public List<TaskDto> findAll() throws TaskServiceUnavailableEx {
 
         try {
             restTemplate.getForObject(resource, TaskDto[].class);
         } catch (ResourceAccessException ex) {
             LOGGER.error(ex.getMessage(), ex);
-            throw new ServiceUnavailableEx();
+            throw new TaskServiceUnavailableEx();
         }
         return Arrays.stream(restTemplate.getForObject(resource, TaskDto[].class)).collect(Collectors.toList());
     }

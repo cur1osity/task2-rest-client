@@ -24,7 +24,7 @@ public class TaskClientController {
         try {
             model.addAttribute("tasks", service.findAll());
             model.addAttribute("newTask", new TaskDto());
-        } catch (ServiceUnavailableEx ex) {
+        } catch (TaskServiceUnavailableEx ex) {
             noService(model);
         }
         return "tasks";
@@ -37,7 +37,7 @@ public class TaskClientController {
             model.addAttribute("tasks", service.findAll());
             model.addAttribute("task", service.findTask(id));
             model.addAttribute("newTask", new TaskDto());
-        } catch (ServiceUnavailableEx ex) {
+        } catch (TaskServiceUnavailableEx ex) {
             noService(model);
         }
         return "tasks";
@@ -50,7 +50,6 @@ public class TaskClientController {
         model.addAttribute("noService", "serviceUnvailable");
         return "tasks";
     }
-
 
     @PatchMapping({"/{id}"})
     public String update(@PathVariable Long id, TaskDto task, RedirectAttributes model) {
@@ -79,5 +78,4 @@ public class TaskClientController {
         service.create(task);
         return "redirect:/tasks";
     }
-
 }
