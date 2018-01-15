@@ -1,5 +1,6 @@
 package com.cur1osity.task2restclient.service;
 
+import com.cur1osity.task2restclient.domain.CreatedTrelloCardDto;
 import com.cur1osity.task2restclient.domain.TrelloBoardDto;
 import com.cur1osity.task2restclient.domain.TrelloCardDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,6 @@ public class TrelloClientService {
 
     public List<TrelloBoardDto> findAll()  {
 
-//            restTemplate.getForObject(resource, TrelloBoardDto[].class);
-
         return Arrays.stream(restTemplate.getForObject(resource, TrelloBoardDto[].class)).collect(Collectors.toList());
     }
 
@@ -36,8 +35,7 @@ public class TrelloClientService {
         return restTemplate.getForObject(idResource, TrelloBoardDto.class, id);
     }
 
-    public TrelloCardDto createTrelloCard(TrelloCardDto trelloCardDto) {
-        return restTemplate.postForObject(resource, trelloCardDto, TrelloCardDto.class);
+    public CreatedTrelloCardDto createTrelloCard(TrelloCardDto trelloCardDto) {
+        return restTemplate.postForObject(resource, trelloCardDto, CreatedTrelloCardDto.class);
     }
-
 }

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/trello")
@@ -46,11 +45,17 @@ public class TrelloController {
         return "trello";
     }
 
-
     @PostMapping
-    public String create(@ModelAttribute("newTrelloCard") TrelloCardDto trelloCardDto, RedirectAttributes model) {
-        model.addFlashAttribute("message_post", "success");
-        trelloClientService.createTrelloCard(trelloCardDto);
-        return "redirect:/trello";
+    public String create(@ModelAttribute("newTrelloCard") TrelloCardDto trelloCardDto, Model model) {
+
+        try {
+            model.addAttribute("tasks", service.findAll());
+            model.addAttribute("newTask", new TaskDto());
+            model.addAttribute("trelloBoards", trelloClientService.findAll());
+            model.addAttribute("trelloCard", trelloClientService.createTrelloCard(trelloCardDto));
+        } catch (ServiceUnavailableEx ex) {
+//            noService(model);
+        }
+        return "trello";
     }
 }

@@ -21,14 +21,14 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a th:href="@{/tasks}">Home</a></li>
+                <li><a th:href="@{/trello}">Trello Client</a></li>
                 <li class="dropdown">
                     <a href="#" th:class="${(noService == null) ? 'show' : 'hidden'}" class="dropdown-toggle black_link"
                        data-toggle="dropdown">
                         Settings <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="swagger_link" th:href="@{/trello}">Go to Trello page</a></li>
-                        <li><a class="swagger_link" href="http://localhost:8080/swagger-ui.html">Swagger-ui</a></li>
+                        <li><a class="swagger_link" href="http://localhost:8080/swagger-ui.html">Go to Swagger2</a></li>
                         <li><a href="javascript:document.forms[0].submit()">Delete all tasks</a></li>
                         <form id="delete_form" th:method="delete" th:action="@{/tasks}"></form>
                     </ul>

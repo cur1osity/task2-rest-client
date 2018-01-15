@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/main.css}"
           href="../../css/main.css"/>
-    <title>Tasks application</title>
+    <title>Trello Client App</title>
 </head>
 <body>
 
@@ -21,7 +21,8 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a th:href="@{/tasks}">Home</a></li>
+                <li><a th:href="@{/tasks}">Home</a></li>
+                <li class="active"><a th:href="@{/trello}">Trello client</a></li>
             </ul>
         </div>
     </div>
@@ -32,6 +33,10 @@
 <br>
 <div class="alert alert-warning container col-md-12" th:if="${bad_request_error != null}">
         <p th:each="item : *{bad_request_error}" th:text="${item}"></p>
+</div>
+<div class="alert alert-success container col-md-12" th:if="${trelloCard != null}">
+    <p>Trello card was <b>created !</b></p>
+    <a th:href="${trelloCard.shortUrl}" th:text="${trelloCard.shortUrl}"></a>
 </div>
 <div class="container-fluid">
     <table class="table table-striped">
