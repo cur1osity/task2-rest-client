@@ -20,10 +20,16 @@ body {
     font-family: Lato, sans-serif;
 }
 
-.navbar-nav li a:hover, .navbar-nav li.active a {
+.navbar-nav li a:hover {
     color: white !important;
     background-color: #FF5733 !important;
 }
+
+.navbar-nav li.active a {
+    color: white !important;
+    background-color: #FF5733 !important;
+}
+
 
 .navbar-default .navbar-toggle {
     border-color: transparent;
@@ -34,9 +40,9 @@ body {
     color: black !important;
 }
 
-.dropdown-menu:hover {
-    color:white !important;
-}
+/*.dropdown-menu:hover {*/
+    /*color:white !important;*/
+/*}*/
 
 .btn-primary, .btn-primary:visited {
     background-color:  #a3a3a3  !important;

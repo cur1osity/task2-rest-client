@@ -13,7 +13,6 @@
     <title>Trello Client App</title>
 </head>
 <body>
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -31,6 +30,10 @@
 <br>
 <br>
 <br>
+<div class="alert alert-warning container col-md-12" th:if="${#lists.isEmpty(tasks)}">
+    <p><b>Currently, there are no tasks available</b></p>
+</div>
+
 <div class="alert alert-warning container col-md-12" th:if="${bad_request_error != null}">
     <p th:each="item : *{bad_request_error}" th:text="${item}"></p>
 </div>
